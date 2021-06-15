@@ -1839,7 +1839,7 @@ function yi(e) {
         tabIndex: -1
     }, r.createElement(l, {className: "MuiDataGrid-filterIcon", fontSize: "small"}));
     return r.createElement(M, {
-        title: n.current.getLocaleText("columnHeaderFiltersTooltipActive")(t),
+        title: n.current.getLocaleText("columnHeaderFiltersTooltipActive")(t || '0'),
         enterDelay: 1e3
     }, r.createElement("div", {className: "MuiDataGrid-iconButtonContainer"}, headerName !== "__check__" && headerName !== "Checkbox selection" && r.createElement(S, {
         badgeContent: t,
