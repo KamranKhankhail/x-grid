@@ -1893,10 +1893,11 @@ const ki = r.memo((({column: e, columnMenuOpen: t, colIndex: n, headerHeight: l,
         L = r.useMemo((() => ({
             onClick: (e) => {
                 const value = e.target?.attributes?.getNamedItem('data-value')?.value
-                if (value === 'filter-icon') {
-                    alert('filter icon clicked.');
+                if (value === 'custom-mui-filter-icon-by-kkk') {
+                    console.log('filter-icon-pressed.');
                     return
                 }
+                console.log('outside filter icon pressed.')
                 R("columnHeaderClick")
             },
             onDoubleClick: R("columnHeaderDoubleClick"),
