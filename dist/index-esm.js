@@ -1891,7 +1891,14 @@ const ki = r.memo((({column: e, columnMenuOpen: t, colIndex: n, headerHeight: l,
     e.renderHeader && b.current && (P = e.renderHeader(b.current.getColumnHeaderParams(e.field)));
     const R = r.useCallback((t => r => b.current.publishEvent(t, b.current.getColumnHeaderParams(e.field), r)), [b, e.field]),
         L = r.useMemo((() => ({
-            onClick: R("columnHeaderClick"),
+            onClick: (e) => {
+                const value = e.target?.attributes?.getNamedItem('data-value')?.value
+                if (value === 'filter-icon') {
+                    alert('filter icon clicked.');
+                    return
+                }
+                R("columnHeaderClick")
+            },
             onDoubleClick: R("columnHeaderDoubleClick"),
             onMouseOver: R("columnHeaderOver"),
             onMouseOut: R("columnHeaderOut"),
