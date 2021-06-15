@@ -1898,7 +1898,7 @@ const ki = r.memo((({column: e, columnMenuOpen: t, colIndex: n, headerHeight: l,
                     return
                 }
                 console.log('outside filter icon pressed.')
-                R("columnHeaderClick")
+                R("columnHeaderClick")(e)
             },
             onDoubleClick: R("columnHeaderDoubleClick"),
             onMouseOver: R("columnHeaderOver"),
