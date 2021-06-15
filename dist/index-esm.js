@@ -1824,12 +1824,13 @@ const hi = r.memo((function (e) {
 var Oi;
 
 function yi(e) {
-    const {counter: t} = e, n = r.useContext(Tt), l = n.current.components.ColumnFilteredIcon, o = r.useCallback((e => {
+    const {counter: t, headerName} = e, n = r.useContext(Tt), l = n.current.components.ColumnFilteredIcon, o = r.useCallback((e => {
         e.preventDefault(), e.stopPropagation();
-        const {open: t, openedPanelValue: r} = Ci(n.current.getState());
+        const stat = n.current.getState()
+        stat?.options?.componentsProps?.filterPanel?.onFilterIconPress?.(stat?.focus?.columnHeader?.field)
         t && r === Oi.filters ? n.current.hideFilterPanel() : n.current.showFilterPanel()
     }), [n]);
-    if (!t) return null;
+
     const a = r.createElement(x, {
         onClick: o,
         color: "default",
@@ -1840,10 +1841,10 @@ function yi(e) {
     return r.createElement(M, {
         title: n.current.getLocaleText("columnHeaderFiltersTooltipActive")(t),
         enterDelay: 1e3
-    }, r.createElement("div", {className: "MuiDataGrid-iconButtonContainer"}, t > 1 && r.createElement(S, {
+    }, r.createElement("div", {className: "MuiDataGrid-iconButtonContainer"}, headerName !== "__check__" && headerName !== "Checkbox selection" && r.createElement(S, {
         badgeContent: t,
         color: "default"
-    }, a), 1 === t && a))
+    }, a)))
 }
 
 !function (e) {
@@ -1935,10 +1936,14 @@ const ki = r.memo((({column: e, columnMenuOpen: t, colIndex: n, headerHeight: l,
             open: t,
             iconButtonRef: w
         }),
-        _ = r.createElement(r.Fragment, null, !M && r.createElement(yi, {counter: d}), e.sortable && !e.hideSortIcons && r.createElement(fi, {
+        _ = r.createElement(r.Fragment, null, !M && r.createElement(yi, {counter: d, headerName: ''}), e.sortable && !e.hideSortIcons && r.createElement(fi, {
             direction: i,
             index: c
         }));
+    var _dup = (_headerName) => r.createElement(r.Fragment, null, !M && r.createElement(yi, {counter: d, headerName: _headerName}), e.sortable && !e.hideSortIcons && r.createElement(fi, {
+        direction: i,
+        index: c
+    }));
     return r.useLayoutEffect((() => {
         const e = b.current.getState().columnMenu;
         if (p && !e.open) {
@@ -1961,7 +1966,7 @@ const ki = r.memo((({column: e, columnMenuOpen: t, colIndex: n, headerHeight: l,
         label: e.headerName || e.field,
         description: e.description,
         columnWidth: T
-    }), _), H), r.createElement(hi, Object.assign({
+    }), _dup(e.field || e.headerName)), H), r.createElement(hi, Object.assign({
         resizable: !S && !!e.resizable,
         resizing: a,
         height: l
