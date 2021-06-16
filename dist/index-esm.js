@@ -1827,7 +1827,7 @@ function yi(e) {
     const {counter: t, headerName} = e, n = r.useContext(Tt), l = n.current.components.ColumnFilteredIcon, o = r.useCallback((e => {
         e.preventDefault(), e.stopPropagation();
         const stat = n.current.getState()
-        stat?.options?.componentsProps?.filterPanel?.onFilterIconPress?.(stat?.focus?.columnHeader?.field)
+        stat?.options?.componentsProps?.filterPanel?.onFilterIconPress?.(headerName || stat?.focus?.columnHeader?.field)
         t && r === Oi.filters ? n.current.hideFilterPanel() : n.current.showFilterPanel()
     }), [n]);
 
